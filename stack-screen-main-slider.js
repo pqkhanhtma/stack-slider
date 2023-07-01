@@ -53,6 +53,7 @@
               transform-origin: right;
               transform: scale(${1 - Math.min(items.length, 5)*oStep + oStep});
               opacity: 0;
+              width: 100%;
             }
           `);
           // second child
@@ -63,6 +64,7 @@
               transform-origin: right;
               transform: scale(${1 - index*oStep});
               opacity: ${1 - index*oStep};
+              width: 100%;
             }
           `);
           // prev
@@ -74,6 +76,7 @@
               transform-origin: right;
               transform: scale(${1 - index*oStep - oStep});
               opacity: ${1 - index*oStep - oStep};
+              width: 50%;
             }
           `);
           // last child
@@ -84,6 +87,7 @@
               transform-origin: right;
               transform: scale(${1 - index*0.1});
               opacity: ${1 - index*0.1};
+              width: 100%;
             }
           `);
         }
@@ -93,8 +97,9 @@
               z-index: ${zIndex};
               right: ${- (items[0].clientWidth - 20) + right}px;
               transform-origin: right;
-              transform: scale(${1 - index*oStep});
-              opacity: ${1 - index*oStep};
+              transform: scale(${1 - (index*oStep - oStep)});
+              opacity: ${1 - (index*oStep - oStep)};
+              width: 50%;
             }
           `);
           cardStyles.push(`
@@ -104,6 +109,7 @@
               transform-origin: right;
               transform: scale(${1 - index*oStep - oStep});
               opacity: ${(index == Math.min(items.length, 5) - 1) ? 0 : 1 - index*oStep - oStep};
+              width: 50%;
             }
           `);
           if(index != 1){
@@ -114,6 +120,7 @@
                 transform-origin: right;
                 transform: scale(${1 - index*oStep + oStep});
                 opacity: ${1 - index*oStep + oStep};
+                width: 50%;
               }
             `);
           }
@@ -129,6 +136,7 @@
             transform-origin: right;
             transform: scale(${1 - Math.min(items.length, 5)*0.1});
             opacity: 0;
+            width: 50%;
           }
         `);
       }
