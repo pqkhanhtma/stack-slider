@@ -32,6 +32,7 @@
       var right = 0;
       var shift = 15;
       var oStep = 0.1;
+      var half = 0.6;
       for (let index = 0; index < Math.min(items.length, 5); index++) {
         if(index == 0){
           // first child
@@ -49,11 +50,11 @@
           cardStyles.push(`
             .stack-slider.move-next .card:nth-child(${(index + 1)}) {
               z-index: -1;
-              right: ${- (items[0].clientWidth - 20) + (-shift*Math.min(items.length, 5) + shift)}px;
+              right: ${- (items[0].clientWidth*half - 20) + (-shift*Math.min(items.length, 5) + shift)}px;
               transform-origin: right;
               transform: scale(${1 - Math.min(items.length, 5)*oStep + oStep});
               opacity: 0;
-              width: 100%;
+              width: ${items[0].clientWidth}px;
             }
           `);
           // second child
@@ -64,7 +65,7 @@
               transform-origin: right;
               transform: scale(${1 - index*oStep});
               opacity: ${1 - index*oStep};
-              width: 100%;
+              width: ${items[0].clientWidth}px;
             }
           `);
           // prev
@@ -72,11 +73,11 @@
           cardStyles.push(`
             .stack-slider.move-prev .card:nth-child(${(index + 1)}) {
               z-index: ${zIndex - 1};
-              right: ${- (items[0].clientWidth - 20) + right - shift}px;
+              right: ${- (items[0].clientWidth*half - 20) + right - shift}px;
               transform-origin: right;
-              transform: scale(${1 - index*oStep - oStep});
+              transform: scale(1);
               opacity: ${1 - index*oStep - oStep};
-              width: 50%;
+              width: ${items[0].clientWidth/2}px;
             }
           `);
           // last child
@@ -87,7 +88,7 @@
               transform-origin: right;
               transform: scale(${1 - index*0.1});
               opacity: ${1 - index*0.1};
-              width: 100%;
+              width: ${items[0].clientWidth}px;
             }
           `);
         }
@@ -95,32 +96,34 @@
           cardStyles.push(`
             .card:nth-child(${(index + 1)}) {
               z-index: ${zIndex};
-              right: ${- (items[0].clientWidth - 20) + right}px;
+              right: ${- (items[0].clientWidth*half - 20) + right}px;
               transform-origin: right;
               transform: scale(${1 - (index*oStep - oStep)});
               opacity: ${1 - (index*oStep - oStep)};
-              width: 50%;
+              width: ${items[0].clientWidth/2}px;
             }
           `);
+          // prev
           cardStyles.push(`
             .stack-slider.move-prev .card:nth-child(${(index + 1)}) {
               z-index: ${zIndex - 1};
-              right: ${- (items[0].clientWidth - 20) + right - shift}px;
+              right: ${- (items[0].clientWidth*half - 20) + right - shift}px;
               transform-origin: right;
-              transform: scale(${1 - index*oStep - oStep});
+              transform: scale(${1 - index*oStep});
               opacity: ${(index == Math.min(items.length, 5) - 1) ? 0 : 1 - index*oStep - oStep};
-              width: 50%;
+              width: ${items[0].clientWidth/2}px;
             }
           `);
           if(index != 1){
+            // prev
             cardStyles.push(`
               .stack-slider.move-next .card:nth-child(${(index + 1)}) {
                 z-index: ${zIndex + 1};
-                right: ${- (items[0].clientWidth - 20) + right + shift}px;
+                right: ${- (items[0].clientWidth*half - 20) + right + shift}px;
                 transform-origin: right;
-                transform: scale(${1 - index*oStep + oStep});
-                opacity: ${1 - index*oStep + oStep};
-                width: 50%;
+                transform: scale(${1 - index*oStep + oStep + oStep});
+                opacity: ${1 - index*oStep + oStep + oStep};
+                width: ${items[0].clientWidth/2}px;
               }
             `);
           }
@@ -132,11 +135,11 @@
         cardStyles.push(`
           .card:nth-child(${(Math.min(items.length, 5))}) ~ .card {
             z-index: ${zIndex};
-            right: ${- (items[0].clientWidth - 20) + right + shift}px;
+            right: ${- (items[0].clientWidth*half - 20) + right + shift}px;
             transform-origin: right;
             transform: scale(${1 - Math.min(items.length, 5)*0.1});
             opacity: 0;
-            width: 50%;
+            width: ${items[0].clientWidth/2}px;
           }
         `);
       }
@@ -150,7 +153,7 @@
           opacity: 0;
         }
         .card {
-          transition: 0.4s cubic-bezier(0.15, 0.77, 0.78, 1.09);
+          transition: 0.4s ease;
         }
       `;
       addStyleToDocument(cssText);
