@@ -4,7 +4,6 @@
     items: '.card'
   });
   var container = document.querySelector('.controller');
-
   // Set up event listeners
   var prevButton = container.querySelector('.prev');
   var nextButton = container.querySelector('.next');
