@@ -1,6 +1,6 @@
 
 (function() {
-  var slider = new StackSlider('.wrapper', {
+  var slider = new StackSlider('.container', {
     items: '.card'
   });
   var container = document.querySelector('.controller');
