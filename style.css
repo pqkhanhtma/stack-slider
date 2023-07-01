@@ -19,13 +19,12 @@ body{
     height: 250px;
 }
 
-.card{
+.card {
   position: absolute;
   top: 0;
   right: 0;
   background-color: #fff;
   width: 300px;
-  height: 300px;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-size: 12px;
